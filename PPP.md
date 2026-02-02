@@ -19,7 +19,6 @@ CSC 494 – Individual Project
 - Multiple paid cloud and streaming services
 - Data spread across platforms and devices
 - Privacy concerns
-- Limited customization
 
 ### Why important?
 
@@ -38,7 +37,7 @@ Using home server hardware to build:
 
 - Self-hosted applications
 - Personal cloud storage
-- Media streaming
+- Media streaming and storage
 - Secure remote access
 - Monitoring & automation
 
@@ -150,9 +149,5 @@ By end of semester:
 
 ---
 
-# 10. Learning with AI
 
-AI used as:
-
-- tutor
-- explainer
+# Questions?
