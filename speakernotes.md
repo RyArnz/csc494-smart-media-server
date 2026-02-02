@@ -3,11 +3,17 @@ My project is called the smart home media server
 
 It is a self hosted Ubuntu server that replaces cloud storage and media services with my own private systems.
 
+
+---
+
+
 2:
 Right now a lot of families have several subscriptions that they pay for monthly. I know my family has at least 6, but by hosting my own server, 
 and not subscribing to a bunch of different cloud providers and streaming services. I can save hundrends a year, and I will have seamless access 
 to all my data across my devices. 
 
+
+---
 
 3:
 This project is majority software focused. 
