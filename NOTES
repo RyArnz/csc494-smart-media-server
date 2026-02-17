@@ -1,0 +1,81 @@
+February 17 Notes:
+# Disk Partition Layout – Arnzen Media Server
+
+The Ubuntu 24.04 server is installed on a 512GB NVMe SSD using GPT partitioning and LVM.
+
+## Physical Disk
+Device: `/dev/nvme0n1`  
+Model: KIOXIA 512GB NVMe  
+Size: 476.9 GiB usable  
+
+Partition Table Type: GPT
+
+---
+
+## Partition Structure
+
+### EFI System Partition
+- Device: `/dev/nvme0n1p1`
+- Size: 1GB
+- Filesystem: FAT32
+- Mountpoint: `/boot/efi`
+- Purpose: UEFI boot loader storage
+
+---
+
+### 2️⃣ Boot Partition
+- Device: `/dev/nvme0n1p2`
+- Size: 2GB
+- Filesystem: ext4
+- Mountpoint: `/boot`
+- Purpose: Linux kernel and boot files
+
+---
+
+### 3️⃣ LVM Physical Volume
+- Device: `/dev/nvme0n1p3`
+- Size: ~473.9GB
+- Type: LVM2 member
+- Purpose: Provides flexible logical volume management for the system
+
+---
+
+# LVM Configuration
+
+Volume Group: `ubuntu-vg`
+
+Inside the volume group:
+
+### 🔹 Root Logical Volume
+- Device: `/dev/mapper/ubuntu--vg-ubuntu--lv`
+- Size: 100GB
+- Filesystem: ext4
+- Mountpoint: `/`
+- Purpose: Operating system and system files
+
+### 🔹 Data Logical Volume
+- Device: `/dev/mapper/ubuntu--vg-data`
+- Size: 348GB
+- Filesystem: ext4
+- Mountpoint: `/data`
+- Purpose: Dedicated storage for Docker volumes, media files, and application data
+
+---
+
+# Design Rationale
+
+- The OS is isolated to a fixed 100GB root volume.
+- The remaining space is allocated to `/data` for scalable application storage.
+- LVM allows future resizing or adding additional disks without reinstalling the system.
+- Separating `/data` prevents media growth from impacting system stability.
+
+---
+
+# Current Usage Snapshot
+
+- Root (`/`) → ~13% used
+- Data (`/data`) → ~1% used (clean for Docker deployment)
+
+---
+
+This layout provides production-style separation between system and application storage, supporting the Smart Media Server architecture.
