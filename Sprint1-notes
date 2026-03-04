@@ -1,4 +1,4 @@
-🚀 Sprint 1 – Infrastructure Setup & Core Services Deployment
+Sprint 1 – Infrastructure Setup & Core Services Deployment
 
 Project: AI-Driven Smart Home Media Server
 Server Name: arnzenmediaserver
@@ -32,10 +32,8 @@ Public IP (at time of testing)
 curl -4 ifconfig.me
 
 Returned:
-131.241.110.131
+131.241.xxx.xxx
 
-⚠️ Important Note:
-Public IP differed from DNS A record IP (50.5.75.240), indicating ISP NAT behavior and making direct port forwarding unreliable.
 
 Docker Environment Setup
 Installed Components:
@@ -51,10 +49,6 @@ docker --version
 Core Services Deployed (Sprint 1 Scope)
 Services deployed via Docker Compose:
 - MariaDB (10.11)
-    - Docker Deployment: MariaDB is often deployed alongside Plex in Docker containers for improved portability and management. 
-    - Performance: Using MariaDB can offer better database management for high-demand setups, although it requires more administration than the default configuration. 
-    - Integration: In some setups, MariaDB is used as an external database solution, allowing for more robust data handling than the default internal database.
-    - Alternatives: While some users consider migrating from SQLite to SQL-based systems for stability, Plex works fine for most users without this added complexity. 
 - Redis (alpine)
 - Nextcloud (latest)
 - Plex (separate container)
@@ -92,16 +86,10 @@ PHP working
 Database connectivity functional
 Container networking functional
 
-Initial DNS & Port Forwarding Attempt
-Cloudflare DNS Records Created
-Domain: arnzenserver.org
-A Records:
-cloud → 50.5.75.240
-media → 50.5.75.240
-proxy → 50.5.75.240
+
 
 Proxy status:
-Initially Proxied (orange cloud)
+Initially Proxied 
 Later switched to DNS only (grey cloud) for testing
 Router Port Forwarding Configured
 Netgear R7000:
@@ -117,7 +105,7 @@ Received:
 Error 522 – Connection Timed Out
 Diagnosis:
 Browser: Working
-Cloudflare Edge: Working
+Cloudflare: Working
 Host: Not responding
 Conclusion:
 Cloudflare could not reach origin server.
@@ -205,8 +193,9 @@ Core services deployed	✅
 Local service connectivity verified	✅
 DNS configured	✅
 Cloudflare tunnel established	✅
+- Plex not available externally
 522 error resolved via architecture change	✅
-📌 Sprint 1 Conclusion
+Sprint 1 Conclusion
 
 Sprint 1 successfully established:
 A containerized home server infrastructure
@@ -214,7 +203,13 @@ Secure external routing using Cloudflare Tunnel
 Persistent storage and database services
 A functional Nextcloud instance locally verified
 A production-ready architecture avoiding ISP NAT limitations
+
 The system is now ready for:
-Sprint 2: Monitoring & Observability (Prometheus, Grafana)
+Sprint 2: 
+Plex connectivity for external use
+shared mounted location for nextcloud and plex to upload files directly to plex
+dvd ripper
+Monitoring & Observability (Prometheus, Grafana)
 AI-driven predictive workload monitoring
+Attach hardware displays to track disk,cpu, and other monitoring tools 
 Performance analytics
