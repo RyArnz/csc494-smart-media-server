@@ -1,0 +1,29 @@
+## Information
+
+- Name: Ryan Arnzen
+- Email: arnzenr1@nku.edu
+
+---
+
+## Summary
+
+- One-line description of your project (focus on the problem you solved): 
+I built a self-hosted smart home media server that combines remote media streaming, public cloud storage, live monitoring, and Raspberry Pi-based physical telemetry into one system.
+
+- Why solving this problem is important: 
+This problem is important because home users often depend on separate third-party services for media, storage, and visibility into system health. By solving it with a self-hosted platform, I got to learn practical skills in Linux, Docker deployment, networking, reverse proxy access, monitoring, and hardware integration while creating a system I can use. 
+
+- Your approach/solution: 
+My solution was to build the system on Ubuntu Server using Dockerized services. Plex provides local and remote media access, Nextcloud provides domain-accessible cloud storage, and Prometheus, Grafana, node_exporter, and cAdvisor provide live host and container monitoring. I also extended the system with a Raspberry Pi status panel that reflects server health through physical LED indicators.
+
+- Technology stack used: 
+Ubuntu Server, Docker, Docker Compose, Plex, Nextcloud, Nginx Proxy Manager, Prometheus, Grafana, node_exporter, cAdvisor, Raspberry Pi 4, Python 3, and gpiozero.
+
+- Your two Learning with AI topics:
+  - Topic 1: Linux, Docker, and self-hosted deployment
+  - Topic 2: Monitoring, observability, and Raspberry Pi telemetry integration
+
+- Link to your Canvas page: https://nku.instructure.com/courses/88152/pages/individual-progress-ryan-arnzen
+- Link to your GitHub repository: https://github.com/RyArnz/csc494-smart-media-server
+
+For Grading 1 & 2, you self-evaluate your problem definitions & solutions uploaded to GitHub & Canvas pages.
