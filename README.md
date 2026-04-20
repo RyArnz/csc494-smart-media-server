@@ -1,162 +1,63 @@
-# Smart Home Media System
-CSC 494 – Early Starter Project
+# CSC 494 Smart Home Media Server
 
----
+## Project Summary
+This project builds a self-hosted smart home media and cloud platform on Ubuntu Server using Docker. The system provides remote media streaming through Plex, public cloud storage through Nextcloud, and live monitoring through Prometheus and Grafana. A Raspberry Pi extends the project into an IoT-style status display that reflects server health through physical indicators.
 
-## Team Members
+## Problem
+Home users often rely on separate commercial services for media streaming, file storage, and system monitoring. This project solves that by building a centralized self-hosted platform that provides media access, cloud storage, and observability from one server.
 
-Ryan Arnzen (Team Lead, Infrastructure & Systems)
+## Why This Problem Matters
+A self-hosted platform gives the user more control over data, services, and uptime. It also demonstrates practical skills in Linux administration, Docker deployment, networking, reverse proxy configuration, monitoring, and hardware integration.
 
-This is an individual project. All design, setup, and implementation are completed by me.
+## Solution
+The solution is an Ubuntu Server host running Dockerized services for Plex, Nextcloud, Nginx Proxy Manager, Prometheus, Grafana, node_exporter, and cAdvisor. Plex provides local and remote media access, Nextcloud provides domain-based cloud storage, and Prometheus/Grafana provide live host and container monitoring. A Raspberry Pi polls server metrics and drives an LED status panel.
 
----
-
-## Project Description
-
-Smart Home Media System is a self-hosted home server built on Ubuntu Server that centralizes media storage, personal cloud services, and containerized applications using Docker.
-
-The goal is to replace multiple third-party services with one secure, locally controlled system that provides storage, remote access, and expandable infrastructure for monitoring and future smart home integrations.
-
-This project emphasizes hands-on learning of Linux administration, networking, containerization, and server security.
-
----
-
-## Problem Domain
-
-Many home users rely on separate cloud services for storage and media that:
-
-- cost money over time
-- limit privacy and control
-- are difficult to customize
-- scatter data across platforms
-
-There is a need for a centralized, private, and expandable home server that provides:
-
-- local media access
-- personal cloud storage
-- secure remote connectivity
-- room for future automation and monitoring
-
----
-
-## Features and Requirements
-
-### Features
-
-- Ubuntu Server host
-- Docker-based service deployment
-- Nextcloud personal cloud storage
-- Centralized media storage
-- Secure remote access through Cloudflare proxy
-- Domain configuration
-- Basic monitoring and system health checks
-- Optional media ingestion (DVD → digital files)
-
-### Requirements
-
-- Runs reliably on home hardware
-- Secure external access
-- Modular and scalable design
-- Easy to maintain and expand
-
----
-
-## Non-Functional Requirements
-
-- Linux-based
-- Low resource usage
-- Secure by default
-- Scalable with Docker containers
-- Maintainable and organized
-
----
-
-## Data Model
-
-Data stored on the system includes:
-
-- media files
-- photos and videos
-- documents
-- backups
-- system logs
-
----
+## Technology Stack
+- Ubuntu Server
+- Docker / Docker Compose
+- Plex
+- Nextcloud
+- Nginx Proxy Manager
+- Prometheus
+- Grafana
+- node_exporter
+- cAdvisor
+- Raspberry Pi 4
+- Python 3
+- gpiozero
 
 ## Architecture
+[insert architecture diagram image here]
 
-High-level structure:
+## Services
+- Plex: local + remote media streaming
+- Nextcloud: public domain cloud storage
+- Nginx Proxy Manager: reverse proxy / HTTPS management
+- Prometheus: metrics collection
+- Grafana: dashboard visualization
+- node_exporter: host metrics
+- cAdvisor: container metrics
+- Raspberry Pi: hardware telemetry endpoint
 
-User Devices  
-↓  
-Cloudflare Proxy  
-↓  
-Ubuntu Server  
-↓  
-Docker Containers (Nextcloud + services)
+## Validation Results
+- Plex local access verified
+- Plex remote access verified
+- Nextcloud public domain verified
+- Prometheus targets verified UP
+- Grafana node and container dashboards verified working
+- Raspberry Pi LED integration in progress / completed
 
-[Insert architecture diagram here]
+## Screenshots
+[insert screenshots]
 
----
+## Demo Video
+[insert video link]
 
-## Tests
+## Final Presentation PDF
+[insert Marp PDF link]
 
-### Acceptance Tests
-- Server boots correctly
-- Docker services run
-- Nextcloud accessible locally
-- Remote access works through proxy
-
-### Integration Tests
-- Containers communicate properly
-- Storage persists across restarts
-
-### E2E Tests
-- User connects → logs in → uploads/downloads files successfully
-
----
-
-## Project Documentation
-
-- Project Plan Presentation (PPP)
-- Learning with AI notes
-- Setup instructions
-- Progress updates
-
----
-
-## Learning with AI Integration
-
-AI will be used as a learning assistant to help understand:
-
-- Linux server setup
-- Docker containerization
-- networking and proxy configuration
-- security practices
-- monitoring concepts
-
-AI supports research and troubleshooting, while all implementation is completed manually by me.
-
----
-
-## Schedule & Milestones
-
-### Sprint 1
-- Install Ubuntu Server
-- Configure Docker
-- Repository setup
-
-### Sprint 2
-- Deploy Nextcloud
-- Configure storage
-- Setup domain and proxy
-
-### Sprint 3
-- Add monitoring tools
-- Improve security
-
-### Sprint 4
-- Media management features
-- Testing and polish
-
-Link: (future project board)
+## Future Improvements
+- LCD or OLED hardware display
+- Tautulli integration for active Plex sessions
+- MQTT event layer
+- alerting and notifications
