@@ -54,7 +54,7 @@ The solution is an Ubuntu Server host running Dockerized services for Plex, Next
 
 
 ## Demo Video
-[insert video link]
+(https://youtube.com/shorts/-h2SgqsmxSU?feature=share)
 
 ## Final Presentation PDF
 [insert Marp PDF link]
