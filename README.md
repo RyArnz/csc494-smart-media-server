@@ -54,10 +54,10 @@ The solution is an Ubuntu Server host running Dockerized services for Plex, Next
 
 
 ## Demo Video
-(https://youtube.com/shorts/-h2SgqsmxSU?feature=share)
+[[Demo Video]](https://youtube.com/shorts/-h2SgqsmxSU?feature=share)
 
 ## Final Presentation PDF
-[insert Marp PDF link]
+[[Final Presentation PDF]](https://github.com/RyArnz/csc494-smart-media-server/blob/main/Slides/FinalPresentation.pdf)
 
 ## Future Improvements
 - extend Raspberry Pi from LEDs to LCD/OLED display 
