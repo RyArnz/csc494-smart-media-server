@@ -68,7 +68,7 @@ My solution was to build a Docker-based smart home media platform with:
 - Python LED status script
 - Physical server-health indicators
 
-<!-- Optional: insert architecture screenshot from original PDF page 5 -->
+<img width="1510" height="812" alt="image" src="https://github.com/user-attachments/assets/e3a3ea36-bd9c-4b9d-b895-5f90474340dd" />
 
 ---
 
