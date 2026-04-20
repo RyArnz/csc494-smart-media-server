@@ -48,7 +48,10 @@ The solution is an Ubuntu Server host running Dockerized services for Plex, Next
 - Raspberry Pi LED integration in progress / completed
 
 ## Screenshots
-[insert screenshots]
+<img width="1332" height="793" alt="Plex Dashboard" src="https://github.com/user-attachments/assets/215c9b75-478f-4bfe-981f-7ae6b3aef626" />
+
+<img width="1440" height="900" alt="Nextcloud Dashboard" src="https://github.com/user-attachments/assets/8d96532a-2322-4dd8-bfa5-bc48d2cdddd4" />
+
 
 ## Demo Video
 [insert video link]
