@@ -147,7 +147,7 @@ My solution was to build a Docker-based smart home media platform with:
 - Prometheus is scraping its own metrics
 - Monitoring pipeline is functioning correctly
 
-<img width="1332" height="793" alt="Prometheus Endpoints" src="https://github.com/user-attachments/assets/53b40745-dad1-485a-8227-01c64cb84d96" />
+<img width="1132" height="793" alt="Prometheus Endpoints" src="https://github.com/user-attachments/assets/53b40745-dad1-485a-8227-01c64cb84d96" />
 
 ---
 
