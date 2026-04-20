@@ -60,7 +60,9 @@ The solution is an Ubuntu Server host running Dockerized services for Plex, Next
 [insert Marp PDF link]
 
 ## Future Improvements
-- LCD or OLED hardware display
-- Tautulli integration for active Plex sessions
-- MQTT event layer
-- alerting and notifications
+- extend Raspberry Pi from LEDs to LCD/OLED display 
+- add alerts/notifications 
+- expand monitoring into predictive maintenance 
+- potentially connect with the separate ML monitoring project later
+
+
