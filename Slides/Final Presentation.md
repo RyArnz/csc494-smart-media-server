@@ -205,7 +205,11 @@ My solution was to build a Docker-based smart home media platform with:
 - LED cathode → GND
 
 ---
+# Demo Video
 
+[![Server Demo](https://github.com/user-attachments/assets/cb4f5643-f149-452a-afa2-54f8363e559c)](https://github.com/RyArnz/csc494-smart-media-server/raw/main/Videos/ServerDemo.mp4)
+
+[Click here if the thumbnail does not open](https://github.com/RyArnz/csc494-smart-media-server/raw/main/Videos/ServerDemo.mp4)
 ---
 
 ## Learning With AI
