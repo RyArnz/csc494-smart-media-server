@@ -27,7 +27,7 @@ The solution is an Ubuntu Server host running Dockerized services for Plex, Next
 - gpiozero
 
 ## Architecture
-[insert architecture diagram image here]
+<img width="1510" height="812" alt="image" src="https://github.com/user-attachments/assets/7b0eafd2-3dac-4a58-9364-7f7f9db9905b" />
 
 ## Services
 - Plex: local + remote media streaming
