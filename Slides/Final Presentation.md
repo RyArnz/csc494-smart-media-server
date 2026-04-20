@@ -1,11 +1,3 @@
----
-marp: true
-theme: default
-paginate: true
-size: 16:9
-title: Smart Home Media Server
-author: Ryan Arnzen
----
 
 # Smart Home Media Server
 
@@ -110,6 +102,10 @@ My solution was to build a Docker-based smart home media platform with:
 - Raspberry Pi LED hardware wiring is working and ready for demo
 
 ---
+<img width="1332" height="793" alt="Plex Dashboard" src="https://github.com/user-attachments/assets/b3f63777-ffb2-490e-a0d8-ee9fceebec4c" />
+<img width="1440" height="900" alt="Nextcloud Dashboard" src="https://github.com/user-attachments/assets/4ce3ff2b-3f04-43b7-b109-e2fd6ff121e2" />
+
+---
 
 ## Domain and Service Access
 
@@ -118,8 +114,7 @@ My solution was to build a Docker-based smart home media platform with:
 - Nginx Proxy Manager routes traffic to internal services
 - Plex and Nextcloud are both reachable through their own subdomains
 
-<!-- Optional: insert Cloudflare DNS screenshot from original PDF page 8 -->
-<!-- Optional: insert Plex/Nextcloud screenshot from original PDF page 9 -->
+<img width="1332" height="793" alt="Cloudflare DNS Management" src="https://github.com/user-attachments/assets/56bfc4d0-bd83-49db-9296-b1bc77dc280b" />
 
 ---
 
@@ -152,7 +147,7 @@ My solution was to build a Docker-based smart home media platform with:
 - Prometheus is scraping its own metrics
 - Monitoring pipeline is functioning correctly
 
-<!-- Optional: insert Prometheus targets screenshot from original PDF page 11 -->
+<img width="1332" height="793" alt="Prometheus Endpoints" src="https://github.com/user-attachments/assets/53b40745-dad1-485a-8227-01c64cb84d96" />
 
 ---
 
@@ -174,7 +169,7 @@ My solution was to build a Docker-based smart home media platform with:
 - Plex CPU and memory
 - Nextcloud CPU and memory
 
-<!-- Optional: insert Grafana dashboard screenshot from original PDF page 13 -->
+<img width="1332" height="793" alt="Grafana Dashboard" src="https://github.com/user-attachments/assets/68e8ea1c-0269-4ba8-b76c-986cbd465511" />
 
 ---
 
@@ -208,6 +203,8 @@ My solution was to build a Docker-based smart home media platform with:
 
 - GPIO → resistor → LED anode
 - LED cathode → GND
+
+---
 
 ---
 
