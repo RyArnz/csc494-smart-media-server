@@ -1,11 +1,3 @@
----
-marp: true
-theme: default
-paginate: true
-size: 16:9
-title: Smart Home Media Server
-author: Ryan Arnzen
----
 
 # Smart Home Media Server
 
