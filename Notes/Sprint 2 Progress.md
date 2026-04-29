@@ -375,11 +375,4 @@ The biggest challenge was troubleshooting routing issues where a service worked 
 
 ---
 
-## Next Steps
 
-The next steps after Sprint 2 are:
-
-1. Finalize project documentation
-2. Add or update final screenshots
-3. Finish the final presentation
-4. Update the demo video
