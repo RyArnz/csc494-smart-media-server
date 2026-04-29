@@ -370,9 +370,8 @@ The current project scope includes:
 
 ---
 
-## What This Repository Should Contain
+## What This Repository Contains
 
-A good final version of this repository should contain:
 
 ```text
 csc494-smart-media-server/
@@ -381,29 +380,29 @@ csc494-smart-media-server/
 ├── docker-compose.yml
 ├── .gitignore
 │
-├── docs/
-│   ├── architecture.md
-│   ├── setup-guide.md
-│   ├── service-notes.md
-│   ├── troubleshooting.md
-│   ├── sprint-two-notes.md
-│   ├── final-project-summary.md
-│   └── future-work.md
+├── Notes/
+│   ├── Architecture.md
+│   ├── Service Notes.md
+│   ├── Sprint 2 Progress.md
+│   └── Final Project Summary.md
 │
 ├── scripts/
 │   ├── raspberry_pi_status.py
 │   └── example_prometheus_query.py
 │
-├── images/
-│   ├── architecture-diagram.png
-│   ├── grafana-dashboard.png
-│   ├── plex-access.png
-│   └── nextcloud-access.png
+├── Images/
+│   ├── Cloudflare DNS Management.png
+│   ├── Grafana Dashboard.png
+│   ├── Nextcloud Dashboard.png
+│   ├── Plex Dashboard.png
+│   ├── Plex RemoteAccess.png
+│   └── Prometheus Endpoints.png
 │
-├── slides/
-│   └── final-presentation.md
+├── Slides/
+│   └── Final Presentation.md
 │
-└── demo/
+└── Videos/
+    ├── ServerDemo.mp4
     └── demo-video-notes.md
 ```
 
@@ -879,43 +878,6 @@ venv/
 *.zip
 *.tar
 *.gz
-
----
-
-## Suggested Repository Structure
-
-```text
-csc494-smart-media-server/
-│
-├── README.md
-├── .gitignore
-├── docker-compose.example.yml
-│
-├── docs/
-│   ├── architecture.md
-│   ├── setup-guide.md
-│   ├── service-notes.md
-│   ├── troubleshooting.md
-│   ├── sprint-two-notes.md
-│   ├── final-project-summary.md
-│   └── future-work.md
-│
-├── scripts/
-│   ├── raspberry_pi_status.py
-│   └── example_prometheus_query.py
-│
-├── images/
-│   ├── architecture-diagram.png
-│   ├── grafana-dashboard.png
-│   ├── plex-access.png
-│   └── nextcloud-access.png
-│
-├── slides/
-│   └── final-presentation.md
-│
-└── demo/
-    └── demo-video-notes.md
-```
 
 ---
 
