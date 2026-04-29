@@ -490,9 +490,6 @@ mkdir -p /data/media
 mkdir -p /data/nextcloud
 mkdir -p /data/plex/config
 ```
-
-The exact folders may be different depending on how the server is configured.
-
 ---
 
 ### 4. Deploy Docker Services
@@ -817,43 +814,8 @@ Grafana dashboards displayed server and container metrics correctly.
 
 ---
 
-## Problem 4: Understanding Prometheus Targets
 
-### Issue
 
-It was unclear what Prometheus targets represented.
-
-### Explanation
-
-Prometheus targets are endpoints that Prometheus scrapes for metrics.
-
-In this project, targets include:
-
-```text
-Prometheus itself
-Node Exporter
-cAdvisor
-```
-
-### Result
-
-The monitoring stack became easier to understand because each target had a clear purpose.
-
----
-
-## Problem 5: Prometheus Scraping Its Own Endpoint
-
-### Issue
-
-It seemed strange that Prometheus was scraping itself.
-
-### Explanation
-
-Prometheus scrapes itself so it can monitor its own health and performance.
-
-This helps show whether Prometheus is running correctly.
-
----
 
 ## Security Notes
 
@@ -865,7 +827,6 @@ Important security practices:
 
 - Use strong passwords
 - Keep Docker images updated
-- Do not commit secrets to GitHub
 - Do not commit `.env` files
 - Do not expose admin panels unnecessarily
 - Use HTTPS where possible
@@ -918,16 +879,6 @@ venv/
 *.zip
 *.tar
 *.gz
-```
-
-If the project needs example configuration files, use safe templates such as:
-
-```text
-.env.example
-docker-compose.example.yml
-```
-
-Do not include real passwords or private tokens.
 
 ---
 
