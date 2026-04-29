@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-This repository documents a self-hosted smart media server project built for CSC 494.
+This repository documents a completed self-hosted smart media server project built for CSC 494.
 
 The project combines an Ubuntu Server, Docker-based services, reverse proxy routing, secure remote access, media hosting, private cloud storage, monitoring dashboards, and Raspberry Pi hardware integration into one working system.
 
-The main goal of the project is to demonstrate a practical smart home server that can host local services while still being accessible remotely through a secure domain-based setup.
+The completed system demonstrates how a home server can host useful services locally while still being accessible remotely through a secure domain-based setup.
 
 ---
 
@@ -16,43 +16,25 @@ The purpose of this project is to show how a home server can be built, deployed,
 
 The project includes:
 
-- A personal media server using Plex
-- A private cloud storage service using Nextcloud
-- Docker-based service deployment
-- Nginx Proxy Manager reverse proxy routing
-- Cloudflare Tunnel remote access
-- Prometheus and Grafana server monitoring
+- Plex for media streaming
+- Nextcloud for private cloud storage
+- Docker for service deployment
+- Nginx Proxy Manager for reverse proxy routing
+- Cloudflare Tunnel for remote access
+- Prometheus and Grafana for monitoring
 - Raspberry Pi hardware status integration
-- Final project screenshots, notes, presentation files, and demo video
-
----
-
-## Main Project Goals
-
-The main goals of this project were:
-
-1. Build a working Ubuntu-based home server
-2. Deploy useful self-hosted services
-3. Host Plex for media streaming
-4. Host Nextcloud for private file storage
-5. Make services accessible through a custom domain
-6. Avoid traditional router port forwarding by using Cloudflare Tunnel
-7. Use Nginx Proxy Manager to route subdomains to the correct services
-8. Monitor server health with Prometheus and Grafana
-9. Connect server status information to Raspberry Pi hardware
-10. Document the final system clearly for project review
+- Final screenshots, notes, slides, and demo video
 
 ---
 
 ## Repository Structure
-
-The final repository is organized as follows:
 
 ```text
 csc494-smart-media-server/
 │
 ├── README.md
 ├── .gitignore
+├── docker-compose.yml
 │
 ├── Images/
 │   ├── Cloudflare DNS Management.png
@@ -65,8 +47,12 @@ csc494-smart-media-server/
 ├── Notes/
 │   ├── Architecture.md
 │   ├── Service Notes.md
-│   ├── Sprint 2 Progress.md
+│   ├── Sprint 2 Progress
 │   ├── Final Project Summary.md
+│   ├── Monitoring Notes.md
+│   ├── Raspberry Pi Integration.md
+│   ├── NOTES
+│   ├── Sprint1-notes
 │   └── speakernotes.md
 │
 ├── Slides/
@@ -77,9 +63,34 @@ csc494-smart-media-server/
 │   ├── Smart Home Media Server.pdf
 │   └── Sprint_1_Media_Server_Presentation.pdf
 │
-└── Videos/
-    └── ServerDemo.mp4
+├── Videos/
+│   ├── ServerDemo.mp4
+│   └── demo-video-notes.md
+│
+├── monitoring/
+│   └── prometheus.yml
+│
+└── scripts/
+    ├── example_prometheus_query.py
+    └── raspberry_pi_status.py
 ```
+
+---
+
+## Main Project Goals
+
+The completed project demonstrates the following goals:
+
+1. Build an Ubuntu-based home server
+2. Deploy self-hosted services with Docker
+3. Host Plex for media streaming
+4. Host Nextcloud for private file storage
+5. Make services accessible through a custom domain
+6. Use Cloudflare Tunnel instead of traditional router port forwarding
+7. Use Nginx Proxy Manager to route subdomains to the correct services
+8. Monitor server health with Prometheus and Grafana
+9. Connect server status information to Raspberry Pi hardware
+10. Document the system with screenshots, notes, slides, and a demo video
 
 ---
 
@@ -107,13 +118,11 @@ Nextcloud                  Plex
 cloud.arnzenserver.org     media.arnzenserver.org
 ```
 
-This architecture allows the server to host multiple services and route each service through a clean subdomain.
+Cloudflare handles public DNS.
 
-Cloudflare handles the public DNS side.
+Cloudflare Tunnel forwards remote traffic to the home server.
 
-Cloudflare Tunnel forwards remote traffic to the server.
-
-Nginx Proxy Manager receives the incoming request and forwards it to the correct internal service.
+Nginx Proxy Manager receives the incoming request and routes it to the correct internal service.
 
 ---
 
@@ -137,13 +146,11 @@ Host metrics                  Docker container metrics
               Grafana
 ```
 
-The monitoring stack allows the project to track the health of the server and its Docker containers.
+Prometheus collects metrics from the server and containers.
 
-Prometheus collects metrics.
+Grafana displays those metrics in dashboards.
 
-Grafana displays the metrics in dashboards.
-
-Node Exporter provides host-level metrics.
+Node Exporter provides host-level server metrics.
 
 cAdvisor provides Docker container metrics.
 
@@ -161,11 +168,11 @@ Raspberry Pi
 LED / Hardware Status Display
 ```
 
-The Raspberry Pi is used as a physical hardware extension of the server.
+The Raspberry Pi acts as a physical hardware extension of the server.
 
-The purpose of the Raspberry Pi integration is to show server status through physical output instead of only viewing status through a web dashboard.
+The Raspberry Pi status script checks server metrics and displays the server state through LEDs.
 
-Example status idea:
+Example status behavior:
 
 ```text
 Green LED  = Server healthy
@@ -182,8 +189,11 @@ Blue LED   = Connection or monitoring issue
 |---|---|
 | Ubuntu Server | Main operating system for the home server |
 | Docker | Runs services in containers |
-| Plex | Media server for movies, music, and video files |
+| Docker Compose | Defines the service stack |
+| Plex | Media server for video, music, and other media files |
 | Nextcloud | Private cloud storage and file access |
+| MariaDB | Database backend for Nextcloud |
+| Redis | Cache/support service for Nextcloud |
 | Nginx Proxy Manager | Reverse proxy for routing domains to services |
 | Cloudflare Tunnel | Secure remote access without traditional router port forwarding |
 | Cloudflare DNS | Domain and subdomain management |
@@ -192,6 +202,7 @@ Blue LED   = Connection or monitoring issue
 | Node Exporter | Host system metrics |
 | cAdvisor | Docker container metrics |
 | Raspberry Pi | Physical server-status display and hardware integration |
+| Python | Raspberry Pi and Prometheus query scripts |
 
 ---
 
@@ -211,7 +222,7 @@ Plex demonstrates:
 - Reverse proxy routing through Nginx Proxy Manager
 - Service access through a custom domain
 
-The project includes Plex evidence in:
+Repository evidence:
 
 ```text
 Images/Plex Dashboard.png
@@ -234,7 +245,7 @@ Nextcloud demonstrates:
 - Reverse proxy access
 - Domain-based routing
 
-The project includes Nextcloud evidence in:
+Repository evidence:
 
 ```text
 Images/Nextcloud Dashboard.png
@@ -255,19 +266,19 @@ cloud.arnzenserver.org  ->  Nextcloud
 media.arnzenserver.org  ->  Plex
 ```
 
-Nginx Proxy Manager is important because it allows the system to use clean domain names instead of exposing services through raw IP addresses and port numbers.
+Nginx Proxy Manager allows the project to use clean domain names instead of raw IP addresses and port numbers.
 
 ---
 
 ## Cloudflare Tunnel
 
-Cloudflare Tunnel is used to provide secure remote access to the server without traditional router port forwarding.
+Cloudflare Tunnel provides remote access without traditional router port forwarding.
 
-Instead of forwarding ports from the router to the server, the server maintains a tunnel connection to Cloudflare.
+Instead of opening router ports directly to the server, the server maintains a tunnel connection to Cloudflare.
 
-Remote users connect through Cloudflare, and Cloudflare forwards the traffic through the tunnel to the server.
+Remote users connect through Cloudflare, and Cloudflare forwards traffic through the tunnel to the server.
 
-The project includes Cloudflare evidence in:
+Repository evidence:
 
 ```text
 Images/Cloudflare DNS Management.png
@@ -281,13 +292,13 @@ Prometheus collects metrics from configured targets.
 
 In this project, Prometheus collects data from:
 
-- The Ubuntu server through Node Exporter
-- Docker containers through cAdvisor
-- Prometheus itself for internal health metrics
+- Prometheus itself
+- Node Exporter
+- cAdvisor
 
 Prometheus makes it possible to check server and monitoring health through metric endpoints.
 
-The project includes Prometheus evidence in:
+Repository evidence:
 
 ```text
 Images/Prometheus Endpoints.png
@@ -301,7 +312,7 @@ Grafana displays Prometheus metrics in dashboards.
 
 Grafana makes it easier to understand the server visually by showing graphs and monitoring panels for server and container activity.
 
-The project includes Grafana evidence in:
+Repository evidence:
 
 ```text
 Images/Grafana Dashboard.png
@@ -326,20 +337,18 @@ cloud.arnzenserver.org
 media.arnzenserver.org
 ```
 
-Subdomain roles:
-
 | Subdomain | Service |
 |---|---|
 | `cloud.arnzenserver.org` | Nextcloud |
 | `media.arnzenserver.org` | Plex |
 
-The subdomains are routed through Cloudflare Tunnel to Nginx Proxy Manager, which then forwards traffic to the correct internal service.
+The subdomains are routed through Cloudflare Tunnel to Nginx Proxy Manager, which forwards traffic to the correct internal service.
 
 ---
 
 ## Project Evidence
 
-The repository includes images, notes, slides, and a demo video to document the completed system.
+The repository includes screenshots, notes, slides, scripts, monitoring configuration, and a demo video.
 
 ## Screenshots
 
@@ -357,8 +366,12 @@ Images/Prometheus Endpoints.png
 ```text
 Notes/Architecture.md
 Notes/Service Notes.md
-Notes/Sprint 2 Progress.md
+Notes/Sprint 2 Progress
 Notes/Final Project Summary.md
+Notes/Monitoring Notes.md
+Notes/Raspberry Pi Integration.md
+Notes/NOTES
+Notes/Sprint1-notes
 Notes/speakernotes.md
 ```
 
@@ -377,6 +390,16 @@ Slides/Sprint_1_Media_Server_Presentation.pdf
 
 ```text
 Videos/ServerDemo.mp4
+Videos/demo-video-notes.md
+```
+
+## Support Files
+
+```text
+docker-compose.yml
+monitoring/prometheus.yml
+scripts/example_prometheus_query.py
+scripts/raspberry_pi_status.py
 ```
 
 ---
@@ -451,18 +474,21 @@ Grafana dashboards displayed server and container metrics correctly.
 
 ## Security Notes
 
-This project avoids traditional router port forwarding by using Cloudflare Tunnel.
+This project uses Cloudflare Tunnel instead of traditional router port forwarding.
 
 This improves the remote access design because the server does not need to expose multiple public service ports directly to the internet.
 
-Important security practices used in the project documentation include:
+The repository avoids storing private credentials and separates project documentation from private deployment values.
 
-- Do not commit private configuration values
-- Do not commit passwords
-- Do not commit private tokens
-- Do not commit private keys
-- Keep Cloudflare and Nginx Proxy Manager settings organized
-- Use domain routing instead of exposing raw service ports when possible
+Sensitive values that should stay private include:
+
+- Passwords
+- Private keys
+- Cloudflare tunnel credentials
+- API tokens
+- Database passwords
+- Personal media files
+- Private configuration files
 
 ---
 
