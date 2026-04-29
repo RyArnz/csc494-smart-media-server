@@ -4,37 +4,38 @@
 
 This repository documents a completed self-hosted smart media server project built for CSC 494.
 
-The project combines an Ubuntu Server, Docker-based services, reverse proxy routing, secure remote access, media hosting, private cloud storage, monitoring dashboards, and Raspberry Pi hardware integration into one working system.
+The project combines an Ubuntu Server, Docker-based services, reverse proxy routing, secure remote access, media hosting, private cloud storage, server monitoring, final presentation materials, and a demo video into one documented system.
 
-The completed system demonstrates how a home server can host useful services locally while still being accessible remotely through a secure domain-based setup.
+The completed system demonstrates how a home server can host useful local services while still being accessible remotely through a secure domain-based setup.
 
 ---
 
 ## Project Purpose
 
-The purpose of this project is to show how a home server can be built, deployed, monitored, and connected to physical hardware.
+The purpose of this project is to show how a home server can be built, deployed, monitored, and documented as a working smart media server system.
 
 The project includes:
 
 - Plex for media streaming
 - Nextcloud for private cloud storage
-- Docker for service deployment
-- Nginx Proxy Manager for reverse proxy routing
-- Cloudflare Tunnel for remote access
-- Prometheus and Grafana for monitoring
+- Docker-based service deployment
+- Nginx Proxy Manager reverse proxy routing
+- Cloudflare Tunnel remote access
+- Prometheus and Grafana monitoring
 - Raspberry Pi hardware status integration
-- Final screenshots, notes, slides, and demo video
+- Final screenshots, notes, slides, and demo video evidence
 
 ---
 
 ## Repository Structure
+
+The final repository is organized as follows:
 
 ```text
 csc494-smart-media-server/
 │
 ├── README.md
 ├── .gitignore
-├── docker-compose.yml
 │
 ├── Images/
 │   ├── Cloudflare DNS Management.png
@@ -46,12 +47,13 @@ csc494-smart-media-server/
 │
 ├── Notes/
 │   ├── Architecture.md
-│   ├── Service Notes.md
-│   ├── Sprint 2 Progress
+│   ├── Final Presentation
 │   ├── Final Project Summary.md
 │   ├── Monitoring Notes.md
-│   ├── Raspberry Pi Integration.md
 │   ├── NOTES
+│   ├── Raspberry Pi Integration.md
+│   ├── Service Notes.md
+│   ├── Sprint 2 Progress
 │   ├── Sprint1-notes
 │   └── speakernotes.md
 │
@@ -63,16 +65,8 @@ csc494-smart-media-server/
 │   ├── Smart Home Media Server.pdf
 │   └── Sprint_1_Media_Server_Presentation.pdf
 │
-├── Videos/
-│   ├── ServerDemo.mp4
-│   └── demo-video-notes.md
-│
-├── monitoring/
-│   └── prometheus.yml
-│
-└── scripts/
-    ├── example_prometheus_query.py
-    └── raspberry_pi_status.py
+└── Videos/
+    └── ServerDemo.mp4
 ```
 
 ---
@@ -82,7 +76,7 @@ csc494-smart-media-server/
 The completed project demonstrates the following goals:
 
 1. Build an Ubuntu-based home server
-2. Deploy self-hosted services with Docker
+2. Deploy useful self-hosted services
 3. Host Plex for media streaming
 4. Host Nextcloud for private file storage
 5. Make services accessible through a custom domain
@@ -90,7 +84,7 @@ The completed project demonstrates the following goals:
 7. Use Nginx Proxy Manager to route subdomains to the correct services
 8. Monitor server health with Prometheus and Grafana
 9. Connect server status information to Raspberry Pi hardware
-10. Document the system with screenshots, notes, slides, and a demo video
+10. Document the completed system with screenshots, notes, slides, and a demo video
 
 ---
 
@@ -170,7 +164,7 @@ LED / Hardware Status Display
 
 The Raspberry Pi acts as a physical hardware extension of the server.
 
-The Raspberry Pi status script checks server metrics and displays the server state through LEDs.
+The Raspberry Pi integration shows how server status can be represented through physical output instead of only through a web dashboard.
 
 Example status behavior:
 
@@ -189,11 +183,8 @@ Blue LED   = Connection or monitoring issue
 |---|---|
 | Ubuntu Server | Main operating system for the home server |
 | Docker | Runs services in containers |
-| Docker Compose | Defines the service stack |
 | Plex | Media server for video, music, and other media files |
 | Nextcloud | Private cloud storage and file access |
-| MariaDB | Database backend for Nextcloud |
-| Redis | Cache/support service for Nextcloud |
 | Nginx Proxy Manager | Reverse proxy for routing domains to services |
 | Cloudflare Tunnel | Secure remote access without traditional router port forwarding |
 | Cloudflare DNS | Domain and subdomain management |
@@ -202,7 +193,6 @@ Blue LED   = Connection or monitoring issue
 | Node Exporter | Host system metrics |
 | cAdvisor | Docker container metrics |
 | Raspberry Pi | Physical server-status display and hardware integration |
-| Python | Raspberry Pi and Prometheus query scripts |
 
 ---
 
@@ -348,7 +338,7 @@ The subdomains are routed through Cloudflare Tunnel to Nginx Proxy Manager, whic
 
 ## Project Evidence
 
-The repository includes screenshots, notes, slides, scripts, monitoring configuration, and a demo video.
+The repository includes screenshots, notes, slides, and a demo video.
 
 ## Screenshots
 
@@ -365,12 +355,13 @@ Images/Prometheus Endpoints.png
 
 ```text
 Notes/Architecture.md
-Notes/Service Notes.md
-Notes/Sprint 2 Progress
+Notes/Final Presentation
 Notes/Final Project Summary.md
 Notes/Monitoring Notes.md
-Notes/Raspberry Pi Integration.md
 Notes/NOTES
+Notes/Raspberry Pi Integration.md
+Notes/Service Notes.md
+Notes/Sprint 2 Progress
 Notes/Sprint1-notes
 Notes/speakernotes.md
 ```
@@ -390,16 +381,6 @@ Slides/Sprint_1_Media_Server_Presentation.pdf
 
 ```text
 Videos/ServerDemo.mp4
-Videos/demo-video-notes.md
-```
-
-## Support Files
-
-```text
-docker-compose.yml
-monitoring/prometheus.yml
-scripts/example_prometheus_query.py
-scripts/raspberry_pi_status.py
 ```
 
 ---
@@ -489,6 +470,26 @@ Sensitive values that should stay private include:
 - Database passwords
 - Personal media files
 - Private configuration files
+
+---
+
+## Related Repositories
+
+This repository is the main CSC 494 smart media server project.
+
+The related Learning with AI repository is separate:
+
+```text
+https://github.com/RyArnz/csc494-iot-ai-learning
+```
+
+The separate monitoring and machine learning repository is also separate:
+
+```text
+https://github.com/RyArnz/csc426-smart-media-ml-monitoring
+```
+
+Those repositories support related coursework and monitoring work, but this repository focuses on the smart media server system.
 
 ---
 
