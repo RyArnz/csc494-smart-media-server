@@ -1,4 +1,3 @@
-
 # Sprint 2 Progress
 
 ## Sprint 2 Overview
@@ -156,7 +155,7 @@ Nginx Proxy Manager
 Plex or Nextcloud
 ```
 
-This became one of the most important parts of the project because it allowed the services to be reached remotely while keeping the home network setup cleaner.
+This was one of the most important parts of the project because it allowed the services to be reached remotely while keeping the home network setup cleaner.
 
 Evidence in the repository includes:
 
@@ -194,13 +193,13 @@ Images/Grafana Dashboard.png
 
 ---
 
-## 8. Raspberry Pi Integration Planning
+## 8. Raspberry Pi Integration
 
-The Raspberry Pi was planned as the physical hardware extension of the project.
+The Raspberry Pi was used as the physical hardware extension of the project.
 
 The purpose of the Raspberry Pi is to display server status using physical output such as LEDs.
 
-Planned LED behavior:
+LED behavior:
 
 ```text
 Green LED  = Server healthy
@@ -319,7 +318,7 @@ By the end of Sprint 2, the project had:
 - Nginx Proxy Manager routing services by domain
 - Prometheus collecting metrics
 - Grafana displaying dashboards
-- Raspberry Pi integration planned
+- Raspberry Pi integration planned and documented
 - Screenshots added to the repository
 - Project documentation started
 
@@ -339,7 +338,7 @@ Images/Prometheus Endpoints.png
 Videos/ServerDemo.mp4
 Notes/Architecture.md
 Notes/Service Notes.md
-Notes/Sprint 2 Progress.md
+Notes/Sprint 2 Progress
 Notes/Final Project Summary.md
 ```
 
@@ -359,7 +358,7 @@ Domain -> Cloudflare -> Tunnel -> Reverse Proxy -> Docker Service
 
 Once that path was understood, it became much easier to troubleshoot remote access problems.
 
-Sprint 2 also showed the importance of monitoring. Prometheus and Grafana made it possible to see whether the server and containers were actually healthy instead of guessing.
+Sprint 2 also showed the importance of monitoring. Prometheus and Grafana made it possible to see whether the server and containers were healthy instead of guessing.
 
 ---
 
@@ -375,4 +374,6 @@ The biggest challenge was troubleshooting routing issues where a service worked 
 
 ---
 
+## Final State After Sprint 2
 
+The project had a functioning server foundation with working service routing, monitoring evidence, project screenshots, and documentation. This sprint established the main technical architecture used in the final project.
