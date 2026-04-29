@@ -4,16 +4,76 @@
 
 This project uses a self-hosted smart media server architecture.
 
-The system combines a home Ubuntu server, Docker containers, domain-based routing, secure remote access, monitoring, and Raspberry Pi hardware integration.
+The system combines:
+
+- Ubuntu Server
+- Docker containers
+- Plex
+- Nextcloud
+- Nginx Proxy Manager
+- Cloudflare Tunnel
+- Prometheus
+- Grafana
+- node_exporter
+- cAdvisor
+- Raspberry Pi hardware integration
 
 The main purpose of the architecture is to allow multiple self-hosted services to run on one server and be accessed through clean domain names.
 
 ---
 
-## High-Level Architecture
+## Current Repository Architecture
+
+The current GitHub repository is organized around the final project deliverables.
 
 ```text
-User Device
+csc494-smart-media-server/
+│
+├── README.md
+├── docker-compose.yml
+├── .gitignore
+│
+├── Images/
+│   ├── Cloudflare DNS Management.png
+│   ├── Grafana Dashboard.png
+│   ├── Nextcloud Dashboard.png
+│   ├── Plex Dashboard.png
+│   ├── Plex RemoteAccess.png
+│   └── Prometheus Endpoints.png
+│
+├── Notes/
+│   ├── Architecture.md
+│   ├── Service Notes.md
+│   ├── Sprint 2 Progress.md
+│   ├── Final Project Summary.md
+│   ├── Monitoring Notes.md
+│   ├── Raspberry Pi Integration.md
+│   └── speakernotes.md
+│
+├── Slides/
+│   ├── Final Presentation.md
+│   ├── FinalPresentation.pdf
+│   ├── PPP.md
+│   ├── PPP_slide.pdf
+│   ├── Smart Home Media Server.pdf
+│   └── Sprint_1_Media_Server_Presentation.pdf
+│
+├── Videos/
+│   └── ServerDemo.mp4
+│
+└── scripts/
+    ├── raspberry_pi_status.py
+    └── example_prometheus_query.py
+```
+
+The `Images`, `Notes`, `Slides`, and `Videos` folders match the current repository structure.
+
+---
+
+## High-Level System Architecture
+
+```text
+Remote User
     |
     v
 Cloudflare DNS
@@ -27,11 +87,11 @@ Ubuntu Server
     v
 Nginx Proxy Manager
     |
-    +--------------------+
-    |                    |
-    v                    v
-Nextcloud             Plex
-cloud domain          media domain
+    +-------------------------+
+    |                         |
+    v                         v
+Nextcloud                  Plex
+cloud subdomain            media subdomain
 ```
 
 ---
@@ -41,19 +101,19 @@ cloud domain          media domain
 ```text
 Ubuntu Server
     |
-    +--------------------+
-    |                    |
-    v                    v
-Node Exporter         cAdvisor
-Host Metrics          Container Metrics
-    |                    |
-    +---------+----------+
-              |
-              v
-          Prometheus
-              |
-              v
-            Grafana
+    +-------------------------+
+    |                         |
+    v                         v
+node_exporter              cAdvisor
+host metrics               container metrics
+    |                         |
+    +-----------+-------------+
+                |
+                v
+            Prometheus
+                |
+                v
+              Grafana
 ```
 
 ---
@@ -72,7 +132,7 @@ LED Output / Physical Status Display
 
 ---
 
-## Traffic Flow
+## Remote Traffic Flow
 
 The remote traffic flow is:
 
@@ -86,7 +146,7 @@ Cloudflare
 Cloudflare Tunnel
     |
     v
-localhost:80 on the Ubuntu Server
+localhost:80 on Ubuntu Server
     |
     v
 Nginx Proxy Manager
@@ -95,52 +155,32 @@ Nginx Proxy Manager
 Correct Docker Container
 ```
 
-This allows the project to avoid traditional router port forwarding.
+This design allows the project to avoid traditional router port forwarding.
 
 ---
 
-## Main Server
+## Local Server Flow
 
-The Ubuntu server is the center of the project.
+Inside the local network, the server runs services in Docker containers.
 
-The server runs:
-
-- Docker
-- Plex
-- Nextcloud
-- Nginx Proxy Manager
-- Prometheus
-- Grafana
-- Node Exporter
-- cAdvisor
-- Supporting database/cache containers
-
-The server stores media files and cloud files.
-
----
-
-## Docker
-
-Docker is used to run the services in containers.
-
-This keeps the services separated and makes the setup easier to manage.
-
-Benefits of Docker in this project:
-
-- Easier service deployment
-- Easier restarts
-- Isolated service environments
-- Clear volume mappings
-- Easier backup planning
-- Easier migration later
+```text
+Ubuntu Server
+    |
+    v
+Docker Engine
+    |
+    +------------------------------+
+    |                              |
+    v                              v
+Application Containers        Monitoring Containers
+Plex / Nextcloud / NPM        Prometheus / Grafana / Exporters
+```
 
 ---
 
-## Nginx Proxy Manager
+## Domain Routing
 
-Nginx Proxy Manager is the reverse proxy.
-
-It receives traffic and decides which internal service should receive the request.
+The project uses subdomains to route traffic to different services.
 
 Example:
 
@@ -149,124 +189,153 @@ cloud.arnzenserver.org -> Nextcloud
 media.arnzenserver.org -> Plex
 ```
 
-Without Nginx Proxy Manager, services would need to be accessed by IP address and port number.
+Cloudflare handles the public DNS side.
+
+Cloudflare Tunnel forwards the traffic to the server.
+
+Nginx Proxy Manager routes the traffic to the correct internal container.
 
 ---
 
-## Cloudflare Tunnel
+## Why Nginx Proxy Manager Is Used
 
-Cloudflare Tunnel provides remote access to the server without opening router ports.
+Nginx Proxy Manager allows multiple services to be reached through clean domain names.
 
-The server creates an outbound tunnel connection to Cloudflare.
+Without Nginx Proxy Manager, each service would need to be accessed through a different port.
 
-Cloudflare then forwards incoming domain traffic through the tunnel to the server.
+Example:
 
-This helps keep the home network cleaner and reduces the need for direct public port exposure.
+```text
+Cleaner access:
+https://cloud.arnzenserver.org
+
+Instead of:
+http://server-ip:8080
+```
 
 ---
 
-## Plex
+## Why Cloudflare Tunnel Is Used
+
+Cloudflare Tunnel is used because it allows remote access without opening traditional router ports.
+
+This helps simplify the network setup and reduces direct exposure of the home server.
+
+The server makes an outbound tunnel connection to Cloudflare, and Cloudflare forwards requests through that tunnel.
+
+---
+
+## Main Server Role
+
+The Ubuntu server is the center of the project.
+
+It runs:
+
+- Docker
+- Plex
+- Nextcloud
+- Nginx Proxy Manager
+- Prometheus
+- Grafana
+- node_exporter
+- cAdvisor
+- Supporting database and cache services
+
+The server stores:
+
+- Plex media files
+- Nextcloud files
+- Application configuration
+- Monitoring data
+- Docker volumes
+
+---
+
+## Plex Role
 
 Plex is the media server.
 
-It uses server storage folders to organize and stream media.
+It organizes and streams media files stored on the server.
 
 Plex demonstrates:
 
 - Media hosting
-- Dockerized service deployment
+- Docker deployment
 - Local and remote access
-- Domain routing through Nginx Proxy Manager
+- Reverse proxy routing
+- Service troubleshooting
 
 ---
 
-## Nextcloud
+## Nextcloud Role
 
 Nextcloud is the private cloud storage service.
 
-It allows browser-based file access, uploads, and downloads.
+It allows files to be uploaded, downloaded, and accessed through a browser.
 
 Nextcloud demonstrates:
 
 - Self-hosted cloud storage
-- Web application deployment
+- Web application hosting
 - Database-backed Docker service
-- Reverse proxy routing
+- Reverse proxy access
 
 ---
 
-## Prometheus
+## Prometheus Role
 
 Prometheus collects metrics from configured targets.
 
-In this project, Prometheus collects metrics from:
+The project uses Prometheus to collect metrics from:
 
 - Prometheus itself
-- Node Exporter
+- node_exporter
 - cAdvisor
 
-Prometheus stores time-series data so the server can be monitored over time.
+Prometheus provides the data used by Grafana and can also provide data to the Raspberry Pi script.
 
 ---
 
-## Grafana
+## Grafana Role
 
-Grafana displays the data collected by Prometheus.
+Grafana displays Prometheus metrics in dashboards.
 
-Grafana dashboards make it easier to view:
+Grafana helps show:
 
-- CPU usage
-- RAM usage
+- Server CPU usage
+- Server RAM usage
 - Disk usage
-- Container usage
-- Service status
-- Historical trends
-
----
-
-## Node Exporter
-
-Node Exporter exposes host-level server metrics.
-
-Examples include:
-
-- CPU usage
-- Memory usage
-- Disk usage
-- Filesystem metrics
-- System metrics
-
----
-
-## cAdvisor
-
-cAdvisor exposes Docker container metrics.
-
-Examples include:
-
 - Container CPU usage
-- Container memory usage
-- Active containers
-- Container resource behavior
+- Container RAM usage
+- Prometheus target status
 
 ---
 
-## Raspberry Pi
+## Raspberry Pi Role
 
-The Raspberry Pi is used as a physical status display.
+The Raspberry Pi acts as a physical status display.
 
-It connects the software system to hardware output.
+It can check server health and display the result using LEDs.
 
-The Pi can check server status and display results using LEDs.
-
----
-
-## Related Monitoring Extension
-
-A separate repository exists for machine learning and monitoring experiments:
+Example:
 
 ```text
-https://github.com/RyArnz/csc426-smart-media-ml-monitoring
+Green LED  = Server healthy
+Yellow LED = Warning
+Red LED    = Critical
+Blue LED   = Connection issue
 ```
 
-That repository is related to the monitoring stack, but this CSC 494 repository focuses on the smart media server infrastructure.
+---
+
+## Architecture Summary
+
+The most important architecture idea is that the project is not just one service.
+
+It is a connected system:
+
+```text
+Docker services + domain routing + secure remote access + monitoring + hardware output
+```
+
+This makes the project a complete smart home media server platform.
