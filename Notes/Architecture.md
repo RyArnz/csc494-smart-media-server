@@ -12,13 +12,14 @@ The main purpose of this architecture is to allow multiple services to run on on
 
 ## Current Repository Architecture
 
-The current repository is organized around the final project documentation, screenshots, slides, and demo files.
+The repository is organized around final project documentation, screenshots, slides, demo files, monitoring configuration, and Raspberry Pi support scripts.
 
 ```text
 csc494-smart-media-server/
 │
 ├── README.md
 ├── .gitignore
+├── docker-compose.yml
 │
 ├── Images/
 │   ├── Cloudflare DNS Management.png
@@ -31,8 +32,12 @@ csc494-smart-media-server/
 ├── Notes/
 │   ├── Architecture.md
 │   ├── Service Notes.md
-│   ├── Sprint 2 Progress.md
+│   ├── Sprint 2 Progress
 │   ├── Final Project Summary.md
+│   ├── Monitoring Notes.md
+│   ├── Raspberry Pi Integration.md
+│   ├── NOTES
+│   ├── Sprint1-notes
 │   └── speakernotes.md
 │
 ├── Slides/
@@ -43,11 +48,19 @@ csc494-smart-media-server/
 │   ├── Smart Home Media Server.pdf
 │   └── Sprint_1_Media_Server_Presentation.pdf
 │
-└── Videos/
-    └── ServerDemo.mp4
+├── Videos/
+│   ├── ServerDemo.mp4
+│   └── demo-video-notes.md
+│
+├── monitoring/
+│   └── prometheus.yml
+│
+└── scripts/
+    ├── example_prometheus_query.py
+    └── raspberry_pi_status.py
 ```
 
-This layout separates the project into documentation, screenshots, presentation files, and demo evidence.
+This layout separates the project into final documentation, visual evidence, presentation files, demo evidence, and supporting configuration/scripts.
 
 ---
 
@@ -77,7 +90,7 @@ cloud.arnzenserver.org     media.arnzenserver.org
 
 This is the main traffic path for remote access.
 
-Cloudflare handles the public domain side.
+Cloudflare handles the public DNS side.
 
 Cloudflare Tunnel forwards traffic to the home server.
 
@@ -100,7 +113,7 @@ Application Services          Monitoring Services
 Plex / Nextcloud / NPM        Prometheus / Grafana / Exporters
 ```
 
-The Ubuntu server is the physical or main host machine.
+The Ubuntu server is the main host machine.
 
 Docker is used to run each service in a container so the services remain easier to manage and isolate.
 
@@ -125,7 +138,7 @@ Plex provides the media server portion of the project.
 
 Nextcloud provides the private cloud storage portion of the project.
 
-Both services are routed through Nginx Proxy Manager for cleaner public access.
+Both services are routed through Nginx Proxy Manager for domain-based access.
 
 ---
 
@@ -144,16 +157,9 @@ cloud.arnzenserver.org               media.arnzenserver.org
 Forward to Nextcloud                 Forward to Plex
 ```
 
-Nginx Proxy Manager is important because it allows multiple services to share the same public entry point.
+Nginx Proxy Manager allows multiple services to share the same public entry point.
 
-Instead of accessing services with different ports, users can access them with clear subdomains.
-
-Example:
-
-```text
-cloud.arnzenserver.org  ->  Nextcloud
-media.arnzenserver.org  ->  Plex
-```
+Instead of accessing services with different ports, users access them with clear subdomains.
 
 ---
 
@@ -176,7 +182,7 @@ Cloudflare Tunnel allows the home server to be reached remotely without traditio
 
 The tunnel creates an outbound connection from the server to Cloudflare. Remote users connect to Cloudflare, and Cloudflare forwards the traffic through the tunnel to the local server.
 
-This makes the remote access setup cleaner and avoids exposing multiple services directly through router port forwarding.
+This keeps the remote access setup cleaner and avoids exposing multiple services directly through router port forwarding.
 
 ---
 
@@ -200,7 +206,7 @@ Host metrics                  Docker container metrics
               Grafana
 ```
 
-The monitoring stack allows the project to track server health.
+The monitoring stack tracks server health.
 
 Prometheus collects metrics.
 
@@ -242,7 +248,7 @@ LED Status Output
 
 The Raspberry Pi extends the project into a physical IoT-style display.
 
-The Pi can check server status data and display the result using LEDs.
+The Pi checks server status data and displays the result using LEDs.
 
 Example LED logic:
 
@@ -298,13 +304,9 @@ Images/Prometheus Endpoints.png
 Videos/ServerDemo.mp4
 ```
 
-These files support the final project by showing the working services, monitoring dashboard, remote access, and project demo.
-
 ---
 
-## Why This Architecture Works
-
-This architecture works because each part has a clear responsibility.
+## Component Responsibilities
 
 | Component | Responsibility |
 |---|---|
@@ -322,7 +324,7 @@ This architecture works because each part has a clear responsibility.
 
 ## Main Architecture Lesson
 
-The most important lesson from this architecture is that remote access requires the entire route to be correct.
+The most important architecture lesson is that remote access requires the entire route to be correct.
 
 A service can work locally but still fail remotely if any part of this chain is wrong:
 
@@ -342,4 +344,4 @@ The separate monitoring and machine learning repository is:
 https://github.com/RyArnz/csc426-smart-media-ml-monitoring
 ```
 
-That repository is related to the Prometheus monitoring work, but this repository focuses on the smart media server infrastructure itself.
+That repository is related to Prometheus monitoring work, but this repository focuses on the smart media server infrastructure itself.
